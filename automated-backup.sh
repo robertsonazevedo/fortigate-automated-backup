@@ -18,7 +18,8 @@ then
     if [ $? -eq 0 ]
     then 
         echo "Download Backup File Success!"
-        FGT_NAME=`grep hostname sys_config  | awk '{print $3}' | sed 's/^.//; s/.$//'`
+        #FGT_NAME=`grep hostname sys_config  | awk '{print $3}' | sed 's/^.//; s/.$//'`
+        FGT_NAME=`sed -n '/hostname/{p;q;}' sys_config  | awk '{print $3}' | sed 's/^.//; s/.$//'`
         echo "Renaming file..."
         mv sys_config $FGT_NAME\_`date +"%Y-%m-%d-%T"\.conf`
         echo "File renamed!"
